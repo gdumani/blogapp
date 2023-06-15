@@ -9,6 +9,7 @@ RSpec.describe 'Posts', type: :request do
     it 'returns http success' do
       get "/users/#{@usr.id}/posts"
       expect(response).to have_http_status(:success)
+      expect(response).to render_template(:index)
       expect(response.body.include?('List of posts for a given user')).to be true
     end
   end
@@ -17,6 +18,7 @@ RSpec.describe 'Posts', type: :request do
     it 'returns http success' do
       get "/users/#{@usr.id}/posts/#{@pst.id}"
       expect(response).to have_http_status(:success)
+      expect(response).to render_template(:show)
       expect(response.body.include?('Given post of given user')).to be true
     end
   end

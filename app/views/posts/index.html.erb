@@ -1,5 +1,4 @@
-<h1>List of posts for a given user</h1>
-
+<%= link_to 'Home', "/" %>
 <table>
     <tr>
       <td>
@@ -24,6 +23,8 @@
             <%= content_tag :small, "Comments: #{post.comments_counter}, Likes: #{post.likes_counter}" %>
           </p>
         </td>
+        <td><%= link_to '>', "/users/#{@user.id}/posts/#{post.id}" %></td>
+
       </tr>
       <tr><td>
         <table>

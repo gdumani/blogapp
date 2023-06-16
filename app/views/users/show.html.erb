@@ -7,8 +7,8 @@
         alt: "User Photo", width: "180" %>
       </td>
       <td>
-        <h2><%= @user.name%></h2> 
-        <p><%= "Number of posts: #{@user.posts_counter}" %></p>
+        <%= content_tag :h2, @user.name %>
+        <%= content_tag :p, "Number of posts: #{@user.posts_counter}" %>
       </td>
     </tr>
 </table>

@@ -1,5 +1,4 @@
-<h1>Given user with recent posts</h1>
-
+<%= link_to 'home', '/' %>
 <table>
     <tr>
       <td>
@@ -31,4 +30,5 @@
         </td>
       </tr>
     <%end%>
+    <tr><th><%= link_to 'Show all Posts', "/users/#{@user.id}/posts" %></th></tr>
 </table>

@@ -1,5 +1,4 @@
-<h1>List of users</h1>
-
+<%= link_to 'Home', "/" %>
 <table>
   <% @users.each do |user| %>
     <tr>
@@ -11,6 +10,7 @@
         <%= content_tag :h2, user.name %>
         <%= content_tag :p, "Number of posts: #{user.posts_counter}" %>
       </td>
+      <td><%= link_to '>', "/users/#{user.id}" %></td>
     </tr>
   <% end %>
 </table>

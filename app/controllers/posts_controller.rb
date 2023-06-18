@@ -15,13 +15,14 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = Post.new author: current_user, title: params[:title], text: params[:text], comments_counter: 0, likes_counter: 0
+    @post = Post.new author: current_user, title: params[:title], text: params[:text], comments_counter: 0,
+                     likes_counter: 0
     if @post.save
       redirect_to "/users/#{current_user.id}/posts/#{@post.id}"
     else
       render :new, status: :unprocessable_entity
       puts '********invalid post*********'
       puts @post.errors.messages
-    end 
+    end
   end
 end

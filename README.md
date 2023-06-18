@@ -118,7 +118,9 @@ Example command:
 
 ```sh
   cd blogapp
-  gem install
+  bundle install
+  rails db:setup
+  rails db:migrate
 ```
 --->
 

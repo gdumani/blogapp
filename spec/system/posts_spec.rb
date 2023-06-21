@@ -2,96 +2,87 @@ require 'rails_helper'
 
 RSpec.describe Post, type: :system do
   before(:each) do
-    @user1 = User.create!(name: 'Dico Diaz', photo: '/assets/nophoto.png', bio: 'user bio', posts_counter: 0)
-    @post = Post.create!(author_id: @user1.id, title: 'post title', text: 'post body', comments_counter: 0, likes_counter: 0)
-    @comment = Comment.create!(user_id: @user1.id, post: @post, text: 'comment body')
-    @comment2 = Comment.create!(user_id: @user1.id, post: @post, text: 'comment body 2')
-    Like.create!(user_id: @user1.id, post: @post)
+    @user1 = User.create(name: 'user1', photo: '/assets/1.png', bio: 'Mock bio', posts_counter: 0)
+    @user2 = User.create(name: 'user2', photo: '/assets/2.png', bio: 'Mock bio 2', posts_counter: 0)
+    @post1 = Post.create(author: @user1, title: 'Title', text: 'text of the post', comments_counter: 0,
+                         likes_counter: 0)
+    @comment = Comment.create(user: @user2, post: @post1, text: 'text')
+    Like.create(user: @user1, post: @post1)
   end
 
   describe 'index page' do
-    it "shows the user's profile picture" do
+    before(:each) do
       visit user_posts_path(@user1.id)
-      expect(page).to have_xpath("//img[contains(@src,'/assets/nophoto.png')]")
+    end
+    it "shows the user's profile picture" do
+      expect(page).to have_xpath("//img[contains(@src,'/assets/1.png')]")
     end
 
     it "shows the user's username" do
-      visit user_posts_path(@user1.id)
       expect(page).to have_content(@user1.name)
     end
 
     it 'shows the number of posts the user has written' do
-      visit user_posts_path(@user1.id)
       expect(page).to have_content('Number of posts: 1')
     end
 
     it "shows a post's title" do
-      visit user_posts_path(@user1.id)
-      expect(page).to have_content(@post.title)
+      expect(page).to have_content(@post1.title)
     end
 
     it "shows some of the post's body" do
-      visit user_posts_path(@user1.id)
-      expect(page).to have_content(@post.text)
+      expect(page).to have_content(@post1.text)
     end
 
     it 'shows the first comments on a post' do
-      visit user_posts_path(@user1.id)
       expect(page).to have_content(@comment.text)
     end
 
     it 'shows how many comments a post has' do
-      visit user_posts_path(@user1.id)
-      expect(page).to have_content('Comments: 2')
+      expect(page).to have_content('Comments: 1')
     end
 
     it 'shows how many likes a post has' do
-      visit user_posts_path(@user1.id)
       expect(page).to have_content('Likes: 1')
     end
 
     it "redirects to a post's show page when clicking on it" do
-      visit user_posts_path(@user1.id)
-      click_link 'Show all Posts'
-      expect(page).to have_current_path(user_post_path(@user1.id, @post.id))
+      click_link('>')
+      expect(page).to have_current_path(user_post_path(@user1.id, @post1.id))
     end
   end
 
-  describe 'Post show page' do
-    it "shows the post's title" do
-      visit user_post_path(@user1.id, @post.id)
-      expect(page).to have_content(@post.title)
+  describe 'post show page' do
+    before(:each) do
+      visit user_post_path(@user1.id, @post1.id)
     end
 
-    it "shows who wrote the post" do
-      visit user_post_path(@user1.id, @post.id)
+    it "shows post's title" do
+      expect(page).to have_content(@post1.title)
+    end
+
+    it "shows post's author" do
       expect(page).to have_content(@user1.name)
     end
 
-    it 'shows how many comments the post has' do
-      visit user_post_path(@user1.id, @post.id)
-      expect(page).to have_content('Comments: 2')
+    it "shows comment's counter" do
+      expect(page).to have_content("Comments: #{@post1.comments_counter}")
     end
 
-    it 'shows how many likes the post has' do
-      visit user_post_path(@user1.id, @post.id)
-      expect(page).to have_content('Likes: 1')
+    it "shows like's counter" do
+      expect(page).to have_content("Likes: #{@post1.likes_counter}")
     end
 
-    it "shows the post's body" do
-      visit user_post_path(@user1.id, @post.id)
-      expect(page).to have_content(@post.text)
+    it "shows post's text" do
+      expect(page).to have_content(@post1.text)
     end
 
-    it 'shows the username of each commentor' do
-      visit user_post_path(@user1.id, @post.id)
-      expect(page).to have_content(@user1.name)
+    it "shows commentor's name" do
+      expect(page).to have_content(@user2.name)
     end
 
-    it 'shows the comment each commentor left' do
-      visit user_post_path(@user1.id, @post.id)
+    it "shows commentor's text" do
       expect(page).to have_content(@comment.text)
-      expect(page).to have_content(@comment2.text)
     end
   end
 end

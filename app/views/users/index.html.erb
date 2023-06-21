@@ -1,12 +1,12 @@
-<%= link_to 'Home', "/" %>
+<%= link_to 'Sign in', new_user_session_path %>
 
-<%= link_to 'Add new post', "/posts/new" %>
+<%= button_to 'New post', "/posts/new" %>
 <table>
   <% @users.each do |user| %>
     <tr>
       <td>
         <%= image_tag user.photo,
-        alt: "User Photo", width: "180" %>
+        alt: "User Photo", width: "100" %>
       </td>
       <td>
         <%= content_tag :h2, user.name %>

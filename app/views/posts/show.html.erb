@@ -10,6 +10,10 @@
       </p>
       <%= content_tag :p, @post.text %>
     </td>
+    <td>
+      <%= link_to 'Comment', "/comments/new/#{@post.id}" %>
+      <%= link_to 'Like', "/likes/create/#{@post.id}" %>
+    </td>
   </tr>
   <tr><td>
     <table>

@@ -106,7 +106,9 @@ install Rails
 Clone this repository to your desired folder:
 
 ```sh
-gh repo clone gdumani/blogapp```
+gh repo clone gdumani/blogapp
+
+```
 --->
 
 ### Install
@@ -118,7 +120,9 @@ Example command:
 
 ```sh
   cd blogapp
-  gem install
+  bundle install
+  rails db:setup
+  rails db:migrate
 ```
 --->
 

@@ -32,3 +32,6 @@
 
 # Ingore Node modules used in Stylint
 /node_modules
+
+# Ignore security credentials
+/config/credentials.yml.enc

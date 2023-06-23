@@ -1,0 +1,8 @@
+      <td>
+        <%= image_tag user.photo,
+        alt: "User Photo", width: "100" %>
+      </td>
+      <td>
+        <%= content_tag :h2, user.name %>
+        <%= content_tag :p, "Number of posts: #{user.posts_counter}" %>
+      </td>

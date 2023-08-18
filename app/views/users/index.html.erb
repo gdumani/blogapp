@@ -1,6 +1,6 @@
 <%if current_user%>
 <%= content_tag :h2, "Welcome #{current_user.name}" %>
-<%= link_to 'Sign out', destroy_user_session_path, data: { turbo_method: :delete } %>
+<%= link_to 'Sign out', destroy_user_session_path, data: { method: :delete } %>
 <%= link_to 'Edit Profile',  edit_user_registration_path %>
 <%= button_to 'New post', post_new_path %>
 <% else %>

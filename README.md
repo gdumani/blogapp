@@ -15,7 +15,7 @@
 - [💻 Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
   - [Setup](#setup)
-  - [Install](#install)
+  <!-- - [Install](#install) -->
   - [Usage](#usage)
   <!-- - [Run tests](#run-tests) -->
   <!-- - [Deployment](#deployment) -->
@@ -107,13 +107,12 @@ Clone this repository to your desired folder:
 
 ```sh
 gh repo clone gdumani/blogapp```
---->
-
+```
+<!--
 ### Install
 
 Install this project with:
 
-<!--
 Example command:
 
 ```sh

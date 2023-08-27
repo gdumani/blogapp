@@ -1,3 +1,24 @@
-<h1>Posts#show</h1>
-<p>Find me in app/views/posts/show.html.erb</p>
-<h1>Given post of given user</h1>
+<%= link_to 'Home', "/" %>
+<table>
+  <tr>
+    <td>
+      <p>
+        <span><%= content_tag :big, "#{@post.title} by #{@user.name} " %></span>
+        <span>
+          <%= content_tag :small, "Comments: #{@post.comments_counter}, Likes: #{@post.likes_counter}" %>
+        </span>
+      </p>
+      <%= content_tag :p, @post.text %>
+    </td>
+  </tr>
+  <tr><td>
+    <table>
+      <tr>
+        <% @comments.each do |comment|%>
+        <%= content_tag :td, comment.user.name %>
+        <%= content_tag :td, comment.text %>
+      </tr>
+    <% end %>
+    </table>
+  </td></tr>
+</table>

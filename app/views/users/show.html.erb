@@ -1,3 +1,34 @@
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
-<h1>Given user with recent posts</h1>
+<%= link_to 'home', '/' %>
+<table>
+    <tr>
+      <td>
+        <%= image_tag @user.photo,
+        alt: "User Photo", width: "180" %>
+      </td>
+      <td>
+        <%= content_tag :h2, @user.name %>
+        <%= content_tag :p, "Number of posts: #{@user.posts_counter}" %>
+      </td>
+    </tr>
+</table>
+<table>
+    <tr>
+      <td>
+      <%= content_tag :h4, 'Bio' %>
+      <%= content_tag :p, @user.bio %>
+      </td>
+    </tr>
+    <tr><%= content_tag :th, 'POSTS' %></tr>
+    <% @user.recent_posts.each do |post|%>
+      <tr>
+        <td>
+          <%= content_tag :h4, post.title %>
+          <%= content_tag :p, post.text.truncate(100)%>
+          <p>
+            <%= content_tag :small, "Comments: #{post.comments_counter}, Likes: #{post.likes_counter}" %>
+          </p>
+        </td>
+      </tr>
+    <%end%>
+    <tr><th><%= link_to 'Show all Posts', "/users/#{@user.id}/posts" %></th></tr>
+</table>

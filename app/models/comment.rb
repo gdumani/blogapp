@@ -2,6 +2,7 @@ class Comment < ApplicationRecord
   belongs_to :user
   belongs_to :post
 
+  validates :text, presence: true
   after_create :update_posts_counter
 
   private

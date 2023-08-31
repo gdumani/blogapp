@@ -28,6 +28,7 @@
             <%= content_tag :small, "Comments: #{post.comments_counter}, Likes: #{post.likes_counter}" %>
           </p>
         </td>
+        <td><%= link_to '>', "/users/#{@user.id}/posts/#{post.id}" %></td>
       </tr>
     <%end%>
     <tr><th><%= link_to 'Show all Posts', "/users/#{@user.id}/posts" %></th></tr>

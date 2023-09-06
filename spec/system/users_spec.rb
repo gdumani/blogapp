@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-Spec.describe User, type: :system do
+RSpec.describe User, type: :system do
    before(:each) do
      @user1 = User.create(name: 'User1', photo: '/assets/1.png', bio: 'Mock bio', posts_counter: 0)
      @user2 = User.create(name: 'User2', photo: '/assets/2.png', bio: 'Mock bio 2', posts_counter: 0)

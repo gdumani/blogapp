@@ -1,23 +1,12 @@
-<%if current_user%>
-<%= content_tag :h2, "Welcome #{current_user.name}" %>
-<%= button_to 'Sign out', destroy_user_session_path, method: :delete %>
-<%= button_to 'Edit Profile', edit_user_registration_path, method: :get %>
-<%= button_to 'New post', post_new_path %>
-<% else %>
-<%= link_to 'Sign in', new_user_session_path %>
-<% end %>
-<table>
-  <% @users.each do |user| %>
-    <tr>
-      <td>
-        <%= image_tag user.photo,
-        alt: "User Photo", width: "180" %>
-      </td>
-      <td>
+
+ <ul class="user-list">
+   <% @users.each do |user| %>
+      <li class="user-item">
+        <%= image_tag user.photo, alt: "User Photo", class:"user-photo" %>
+        <a class="user-info label-link" href=<%="/users/#{user.id}"%>>
         <%= content_tag :h2, user.name %>
+        </a>
         <%= content_tag :p, "Number of posts: #{user.posts_counter}" %>
-      </td>
-      <td><%= link_to '>', "/users/#{user.id}" %></td>
-    </tr>
+      </li>
   <% end %>
 </table>

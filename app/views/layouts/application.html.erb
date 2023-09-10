@@ -11,10 +11,22 @@
   </head>
 
   <body>
-    <div>
-      <p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
-    </div>
+    <nav class="navbar">
+      <%if current_user%>
+        <img src="<%= current_user.photo %>" alt="User Photo" class="navbar-user-photo">  
+        <%= content_tag :h2, "Welcome #{current_user.name}", class: "navbar-link" %>
+        <%= link_to 'Sign out', destroy_user_session_path, data: { turbo_method: :delete }, class: "navbar-link " %>
+        <%= link_to 'Edit Profile', edit_user_registration_path, method: :get, class: "navbar-link" %>
+        <%= link_to 'New post', post_new_path, class: "navbar-link" %>
+        <% else %>
+        <%= link_to 'Sign in', new_user_session_path, class: "navbar-link" %>
+      <% end %>
+        <%= link_to 'Home', '/', class: "navbar-link" %>
+      <div>
+        <p class="notice"><%= notice %></p>
+        <p class="alert"><%= alert %></p>
+      </div>
+    </nav>
     <%= yield %>
   </body>
 </html>

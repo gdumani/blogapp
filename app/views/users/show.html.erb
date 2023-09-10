@@ -1,35 +1,29 @@
-<%= link_to 'home', '/' %>
-<table>
-    <tr>
-      <td>
-        <%= image_tag @user.photo,
-        alt: "User Photo", width: "180" %>
-      </td>
-      <td>
-        <%= content_tag :h2, @user.name %>
-        <%= content_tag :p, "Number of posts: #{@user.posts_counter}" %>
-      </td>
-    </tr>
-</table>
-<table>
-    <tr>
-      <td>
-      <%= content_tag :h4, 'Bio' %>
-      <%= content_tag :p, @user.bio %>
-      </td>
-    </tr>
-    <tr><%= content_tag :th, 'POSTS' %></tr>
-    <% @user.recent_posts.each do |post|%>
-      <tr>
-        <td>
-          <%= content_tag :h4, post.title %>
-          <%= content_tag :p, post.text.truncate(100)%>
-          <p>
-            <%= content_tag :small, "Comments: #{post.comments_counter}, Likes: #{post.likes_counter}" %>
-          </p>
-        </td>
-        <td><%= link_to '>', "/users/#{@user.id}/posts/#{post.id}" %></td>
-      </tr>
+<div class="user-item">
+  <%= image_tag @user.photo,alt: "User Photo", class:"user-photo" %>
+  <div class="user-info">
+    <%= content_tag :h2, @user.name %>
+    <%= content_tag :p, "Number of posts: #{@user.posts_counter}" %>
+  </div>
+</div>
+
+<div class="user-bio">
+  <%= content_tag :h4, 'Bio' %>
+  <%= content_tag :p, @user.bio %>
+</div>
+
+<%= content_tag :h4, 'RECENT POSTS', class:"post-list-title"%>
+
+<% @user.recent_posts.each do |post|%>
+<div class="user-bio">
+      
+  <a class="post-title label-link" href="<%= user_post_path(@user, post) %> ">
+    <%= content_tag :h4, post.title %>
+  </a>  
+  <%= content_tag :p, post.text.truncate(100)%>
+  <p>
+    <%= content_tag :small, "Comments: #{post.comments_counter}, Likes: #{post.likes_counter}" %>
+  </p>
+</div>
+      
     <%end%>
-    <tr><th><%= link_to 'Show all Posts', "/users/#{@user.id}/posts" %></th></tr>
-</table>
+    <%= link_to 'Show all Posts', user_posts_path(@user), class: 'post-list-title' %>

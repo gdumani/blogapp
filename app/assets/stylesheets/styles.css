@@ -298,6 +298,7 @@ body {
 
 .comment-author-name {
   font-weight: bold;
+  padding-right: 1rem;
 }
 
 .pagination-button {

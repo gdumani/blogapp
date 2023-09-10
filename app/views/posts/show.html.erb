@@ -1,28 +1,29 @@
-<%= link_to 'Home', "/" %>
-<table>
-  <tr>
-    <td>
-      <p>
-        <span><%= content_tag :big, "#{@post.title} by #{@user.name} " %></span>
-        <span>
-          <%= content_tag :small, "Comments: #{@post.comments_counter}, Likes: #{@post.likes_counter}" %>
-        </span>
-      </p>
-      <%= content_tag :p, @post.text %>
-    </td>
-    <td>
-      <%= link_to 'Comment', "/comments/new/#{@post.id}" %>
-      <%= link_to 'Like', "/likes/create/#{@post.id}" %>
-    </td>
-  </tr>
-  <tr><td>
-    <table>
-      <tr>
-        <% @comments.each do |comment|%>
-        <%= content_tag :td, comment.user.name %>
-        <%= content_tag :td, comment.text %>
-      </tr>
+
+  
+<div class="post-box">
+  <h3>
+    <%= content_tag :span, @post.title, class:"post-title" %>
+      by 
+    <%= content_tag :span, @user.name, class:"post-author" %>
+  </h3>
+    <span class="comments_likes_count">
+      <%= content_tag :small, "Comments: #{@post.comments_counter}, Likes: #{@post.likes_counter}" %>
+    </span>
+  <%= content_tag :p, @post.text %>
+
+  <div class="one-row-field">
+    <%= button_to 'Comment', "/comments/new/#{@post.id}", method: :get %>
+    <%= button_to 'Like', "/likes/create/#{@post.id}", method: :get %>
+  </div>
+</div>
+
+</div class="comments-box">  
+  <ul class="commemts-list">
+    <% @comments.each do |comment|%>
+      <li class="comment-item">
+        <%= content_tag :span, comment.user.name, class:"comment-author-name" %>
+        <%= content_tag :span, comment.text %>
+      </li>
     <% end %>
-    </table>
-  </td></tr>
-</table>
+  </ul>
+</div>  

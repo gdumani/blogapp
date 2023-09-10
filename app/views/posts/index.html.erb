@@ -1,41 +1,33 @@
-<%= link_to 'Home', "/" %>
-<table>
-    <tr>
-      <td>
-        <%= image_tag @user.photo,
-        alt: "User Photo", width: "180" %>
-      </td>
-      <td>
-        <%= content_tag :h2, @user.name %>
-        <%= content_tag :p, "Number of posts: #{@user.posts_counter}" %>
-      </td>
-    </tr>
-</table>
+<div class="user-item">
+  <%= image_tag @user.photo,alt: "User Photo", class:"user-photo" %>
+  <div class="user-info">
+    <%= content_tag :h2, @user.name %>
+    <%= content_tag :p, "Number of posts: #{@user.posts_counter}" %>
+  </div>
+</div>
 
-<table>
-    <tr><%= content_tag :th, 'ALL POSTS' %></tr>
-    <% @posts.each do |post|%>
-      <tr>
-        <td>
-          <%= content_tag :h4, post.title %>
-          <%= content_tag :p, post.text.truncate(100)%>
-          <p>
-            <%= content_tag :small, "Comments: #{post.comments_counter}, Likes: #{post.likes_counter}" %>
-          </p>
-        </td>
-        <td><%= link_to '>', "/users/#{@user.id}/posts/#{post.id}" %></td>
-
-      </tr>
-      <tr><td>
-        <table>
-          <tr>
-            <% post.recent_comments.each do |comment|%>
-            <%= content_tag :td, comment.user.name %>
-            <%= content_tag :td, comment.text %>
-          </tr>
-        <% end %>
-        </table>
-      </td></tr>
+<%= content_tag :h4, 'ALL POSTS', class:"post-list-title"%>
+    
+<% @posts.each do |post|%>
+  <div class="user-bio">
+    <a class="post-title label-link" href="<%= user_post_path(@user, post) %> ">
+      <%= content_tag :h4, post.title %>
+    </a>  
+    <%= content_tag :p, post.text.truncate(100)%>
+    <p>
+      <%= content_tag :small, "Comments: #{post.comments_counter}, Likes: #{post.likes_counter}" %>
+    </p>
+      
+    <div class='comments-box'>
+      <%= content_tag :h5, 'Recent Comments', class:"recent-comments-header" %>          
+      <% post.recent_comments.each do |comment|%>
+        <p class="comment-item">
+          <%= content_tag :span, "#{comment.user.name}:  ", class:"comment-author-name"%>
+          <%= content_tag :span, comment.text %>
+        </p>
+      <% end %>
+    </div>
+  </div>      
+     
     <%end%>
-    <tr><th><%= link_to 'Pagination', "/users/#{@user.id}/posts" %></th></tr>
-</table>
+    <%= link_to 'Pagination', "/users/#{@user.id}/posts" %>
